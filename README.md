@@ -100,7 +100,7 @@ npm run dev
 
 ## Environment Setup
 
-Create `.env` file in `backend/` directory:
+Create `.env`:
 
 ```env
 # LiveKit (from your LiveKit Cloud dashboard)
@@ -108,10 +108,6 @@ LIVEKIT_URL=wss://your-project.livekit.cloud
 LIVEKIT_API_KEY=your_api_key
 LIVEKIT_API_SECRET=your_api_secret
 RAG_BACKEND_URL="http://localhost:8000"
-
-# Optional - Cartesia TTS (free tier available)
-GROQ_API_KEY=your_groq_key
-CARTESIA_API_KEY=your_cartesia_key
 ```
 
 ## How It Works

@@ -2,8 +2,7 @@
 
 Real-time voice AI agent where you can talk over WebRTC using LiveKit and get answers powered by Retrieval-Augmented Generation (RAG) over your uploaded documents — during the call.
 
-https://deepwiki.com/badge-maker?url=https%3A%2F%2Fdeepwiki.com%2FManojKumarKarumanchi%2Fvoice-rag-agent
-
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ManojKumarKarumanchi/voice-rag-agent)
 ---
 ## 🚀 Features
 

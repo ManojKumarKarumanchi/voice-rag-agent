@@ -1,19 +1,26 @@
-# Voice RAG Agent
+# 🎙️ Voice RAG Agent
 
-Real-time voice AI agent where you can talk over WebRTC (LiveKit) and get answers using RAG over uploaded documents during the call.
+Real-time voice AI agent where you can talk over WebRTC using LiveKit and get answers powered by Retrieval-Augmented Generation (RAG) over your uploaded documents — during the call.
 
-## Features
+---
 
-- **Voice over WebRTC**: Real-time voice conversation using LiveKit
-- **Speech-to-Text**: Groq Whisper (free)
-- **LLM**: Groq Llama (free)
-- **Text-to-Speech**: Cartesia (optional) or text-only mode
-- **RAG**: Upload PDF, CSV, TXT, MD files - agent retrieves relevant chunks and answers from them
-- **React Frontend**: WebRTC connect, editable system prompt, document upload, live transcript, RAG sources panel
+## 🚀 Features
 
-## Architecture
+* **Voice over WebRTC** – Real-time voice conversation via LiveKit
+* **Speech-to-Text (STT)** – Groq Whisper (free tier)
+* **LLM** – Groq LLaMA models (free tier)
+* **Text-to-Speech (TTS)** – Cartesia (optional) or text-only mode
+* **RAG Pipeline** – Upload PDF, CSV, TXT, MD files
+* **Vector Search** – FAISS-based semantic retrieval
+* **Modern Frontend** – React + Vite
+* **Live Transcript & Sources Panel** – See retrieved chunks in real time
+* **Editable System Prompt** – Modify agent behavior on the fly
 
-```
+---
+
+## 🏗 Architecture
+
+```mermaid
 flowchart TD
     A["React UI (Frontend)\n- WebRTC connect\n- Edit prompt\n- Upload files"]
     B["LiveKit Room (WebRTC Audio Stream)"]
@@ -22,7 +29,6 @@ flowchart TD
     E["LLM (Groq Llama optional)"]
     F["TTS (Cartesia optional)"]
 
-    %% Connections
     A -->|WebRTC| B
     B -->|WebRTC| D
     A -->|REST / HTTP| C
@@ -31,20 +37,89 @@ flowchart TD
     E --> F
 ```
 
-## Prerequisites
+---
 
-- Python 3.12+
-- Node.js 18+
-- LiveKit Cloud account (free tier available)
-- Groq API key (free)
+## 🧠 Embedding & RAG Setup
 
-## Installation & Running
+We use:
 
-### Windows 11
+* **Sentence Transformers**
+* **LangChain RecursiveCharacterTextSplitter**
+* **FAISS vector store**
+* **PyPDF fallback loader**
+
+```python
+from sentence_transformers import SentenceTransformer
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+embed_model = SentenceTransformer("BAAI/bge-small-en")
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,
+    chunk_overlap=50
+)
+```
+
+### Embedding Model
+
+* `BAAI/bge-small-en`
+* Lightweight and optimized for semantic retrieval
+* Ideal for local + production RAG setups
+
+---
+
+## 🛠 Tech Stack
+
+### Backend
+
+* FastAPI
+* FAISS (vector search)
+* Sentence Transformers
+* LangChain text splitters
+* PyPDF (fallback document loader)
+
+### Real-Time Layer
+
+* LiveKit (WebRTC audio rooms)
+
+### AI Services
+
+* Groq (Whisper STT + LLaMA inference)
+* Cartesia (optional TTS)
+
+### Frontend
+
+* React
+* Vite
+* WebRTC
+
+---
+
+## 📋 Prerequisites
+
+* Python 3.12+
+* Node.js 18+
+* LiveKit Cloud account (free tier available)
+* Groq API key (free tier available)
+
+---
+
+# ⚙️ Installation & Running
+
+You must run **3 services**:
+
+1. Backend
+2. Agent
+3. Frontend
+
+---
+
+## 🪟 Windows 11
 
 Open **3 separate terminals**:
 
-**Terminal 1 - Backend:**
+### Terminal 1 – Backend
+
 ```powershell
 cd C:\path\to\voice-rag-agent
 
@@ -55,13 +130,15 @@ pip install -r requirements.txt
 python backend\main.py
 ```
 
-**Terminal 2 - Agent:**
+### Terminal 2 – Agent
+
 ```powershell
 cd C:\path\to\voice-rag-agent\agent
 python agent.py dev
 ```
 
-**Terminal 3 - Frontend:**
+### Terminal 3 – Frontend
+
 ```powershell
 cd C:\path\to\voice-rag-agent\frontend
 
@@ -69,11 +146,14 @@ npm install
 npm run dev
 ```
 
-### Linux/macOS
+---
+
+## 🐧 Linux / macOS
 
 Open **3 separate terminals**:
 
-**Terminal 1 - Backend:**
+### Terminal 1 – Backend
+
 ```bash
 cd /path/to/voice-rag-agent
 
@@ -84,49 +164,45 @@ pip install -r requirements.txt
 python3 backend/main.py
 ```
 
-**Terminal 2 - Agent:**
+### Terminal 2 – Agent
+
 ```bash
 cd /path/to/voice-rag-agent/agent
 source ../.venv/bin/activate
 python3 agent.py dev
 ```
 
-**Terminal 3 - Frontend:**
+### Terminal 3 – Frontend
+
 ```bash
 cd /path/to/voice-rag-agent/frontend
 npm install
 npm run dev
 ```
 
-## Environment Setup
+---
 
-Create `.env` file in `backend/` directory:
+# 🔐 Environment Setup
+
+Create `.env` file inside `backend/`:
 
 ```env
-# LiveKit (from your LiveKit Cloud dashboard)
+# LiveKit
 LIVEKIT_URL=wss://your-project.livekit.cloud
 LIVEKIT_API_KEY=your_api_key
 LIVEKIT_API_SECRET=your_api_secret
-RAG_BACKEND_URL="http://localhost:8000"
 
-# Optional - Cartesia TTS (free tier available)
+RAG_BACKEND_URL=http://localhost:8000
+
+# AI Services
 GROQ_API_KEY=your_groq_key
 CARTESIA_API_KEY=your_cartesia_key
 ```
 
-## How It Works
+---
 
-1. **Upload Documents**: Upload PDF, CSV, TXT, or MD files via the web UI
-2. **Indexing**: Documents are chunked and embedded using sentence-transformers, stored in FAISS
-3. **Start Call**: Click "Start Call" to join the LiveKit room
-4. **Speak**: Click "Start Talking" and ask questions
-5. **Agent Response**:
-   - Your speech → Groq STT → Text
-   - Text query → FAISS retrieval → Relevant chunks
-   - Chunks + Query → Groq LLM → Answer
-   - Answer → Transcript display + (optional) TTS
+# 📂 Project Structure
 
-## Project Structure
 ```
 VOICE-RAG-AGENT/
 │
@@ -149,8 +225,7 @@ VOICE-RAG-AGENT/
 │   │
 │   ├── index.html
 │   ├── package.json
-│   ├── package-lock.json
-│   └── vite.config.js
+│   ├── vite.config.js
 │
 ├── .env.example
 ├── .gitignore
@@ -160,31 +235,77 @@ VOICE-RAG-AGENT/
 └── sample-doc.txt
 ```
 
-## API Endpoints
+---
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/upload` | POST | Upload document for RAG |
-| `/ragStatus` | GET | Get RAG indexing status |
-| `/retrieve` | POST | Retrieve relevant chunks |
-| `/getToken` | POST | Get LiveKit token |
-| `/health` | GET | Health check |
+# 🔌 API Endpoints
 
-## Usage
+| Endpoint     | Method | Description              |
+| ------------ | ------ | ------------------------ |
+| `/upload`    | POST   | Upload document for RAG  |
+| `/ragStatus` | GET    | Get indexing status      |
+| `/retrieve`  | POST   | Retrieve relevant chunks |
+| `/getToken`  | POST   | Generate LiveKit token   |
+| `/health`    | GET    | Health check             |
 
-1. Open http://localhost:3000 in your browser
+---
+
+# ▶️ Usage
+
+1. Open `http://localhost:3000`
 2. Upload documents (PDF, CSV, TXT, MD supported)
-3. Wait for "Document is ready" message
-4. Click "Start Call"
-5. Click "Start Talking" and speak
-6. See transcript and RAG sources in real-time
+3. Wait for "Document is ready"
+4. Click **Start Call**
+5. Click **Start Talking**
+6. Ask questions — see:
 
-## Troubleshooting
+   * Live transcript
+   * Retrieved sources
+   * AI response (text or voice)
 
-- **No transcript showing**: Ensure agent is running (`python agent.py dev`)
-- **Documents not indexing**: Check backend console for parsing errors
-- **Connection issues**: Verify LiveKit credentials in .env
+---
 
-## License
+# 🔎 How It Works
+
+1. **Upload Document**
+   Files are parsed (PyPDF fallback supported).
+
+2. **Chunking & Embedding**
+
+   * Split into overlapping chunks
+   * Embedded using BGE model
+   * Stored in FAISS
+
+3. **Voice Interaction Flow**
+
+   * Speech → Groq Whisper → Text
+   * Text → FAISS Retrieval
+   * Retrieved Chunks + Query → Groq LLM
+   * Response → Transcript + Optional TTS
+
+---
+
+# 🛠 Troubleshooting
+
+**No transcript showing**
+
+* Ensure agent is running:
+
+  ```bash
+  python agent.py dev
+  ```
+
+**Documents not indexing**
+
+* Check backend console logs
+* Verify file format support
+
+**Connection issues**
+
+* Confirm LiveKit credentials in `.env`
+* Ensure backend is running on port 8000
+
+---
+
+# 📜 License
 
 MIT

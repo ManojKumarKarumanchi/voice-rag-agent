@@ -1,7 +1,7 @@
 # 🎙️ Voice RAG Agent
 
 Real-time voice AI agent where you can talk over WebRTC using LiveKit and get answers powered by Retrieval-Augmented Generation (RAG) over your uploaded documents — during the call.
-
+https://deepwiki.com/ManojKumarKarumanchi/voice-rag-agent/6.3-ai-service-integration
 ---
 
 ## 🚀 Features

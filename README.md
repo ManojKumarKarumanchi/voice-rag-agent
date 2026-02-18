@@ -6,7 +6,6 @@ Real-time voice AI agent where you can talk over WebRTC using LiveKit and get an
 
 ## 🚀 Features
 
-<<<<<<< HEAD
 * **Voice over WebRTC** – Real-time voice conversation via LiveKit
 * **Speech-to-Text (STT)** – Groq Whisper (free tier)
 * **LLM** – Groq LLaMA models (free tier)
@@ -21,15 +20,11 @@ Real-time voice AI agent where you can talk over WebRTC using LiveKit and get an
 
 ## 🏗 Architecture
 
-=======
-## Architectural Flow
-
->>>>>>> 39eeace6df1cebd8c42765e413d8f9900caa56ee
 ```mermaid
 flowchart TD
-    A["React UI (Frontend)<br/>- WebRTC connect<br/>- Edit prompt<br/>- Upload files"]
+    A["React UI (Frontend)\n- WebRTC connect\n- Edit prompt\n- Upload files"]
     B["LiveKit Room (WebRTC Audio Stream)"]
-    C["FastAPI Backend<br/>- Upload Files<br/>- FAISS RAG<br/>- Token Generation"]
+    C["FastAPI Backend\n- Upload Files\n- FAISS RAG\n- Token Generation"]
     D["STT (Groq Whisper optional)"]
     E["LLM (Groq Llama optional)"]
     F["TTS (Cartesia optional)"]
@@ -187,29 +182,21 @@ npm run dev
 
 ---
 
-<<<<<<< HEAD
 # 🔐 Environment Setup
 
 Create `.env` file inside `backend/`:
-=======
-Create `.env`:
->>>>>>> 39eeace6df1cebd8c42765e413d8f9900caa56ee
 
 ```env
 # LiveKit
 LIVEKIT_URL=wss://your-project.livekit.cloud
 LIVEKIT_API_KEY=your_api_key
 LIVEKIT_API_SECRET=your_api_secret
-<<<<<<< HEAD
 
 RAG_BACKEND_URL=http://localhost:8000
 
 # AI Services
 GROQ_API_KEY=your_groq_key
 CARTESIA_API_KEY=your_cartesia_key
-=======
-RAG_BACKEND_URL="http://localhost:8000"
->>>>>>> 39eeace6df1cebd8c42765e413d8f9900caa56ee
 ```
 
 ---

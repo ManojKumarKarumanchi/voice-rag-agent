@@ -1,0 +1,34 @@
+fastapi
+pydantic>=2.0.0
+python-dotenv
+faiss-cpu
+sentence-transformers
+langchain-text-splitters
+langchain-community
+groq
+livekit-agents
+livekit-agents[groq]
+livekit-agents[silero]
+livekit-agents[cartesia]
+livekit-agents[turn-detector]
+livekit-plugins-noise-cancellation
+python-dotenv
+# TTS
+pyttsx3
+# STT
+SpeechRecognition
+pydub
+# For audio processing
+librosa
+soundfile
+# For handling audio files
+ffmpeg-python
+# For making HTTP requests
+requests
+numpy>1.22.0
+livekit-api
+uvicorn
+python-multipart
+# For document parsing (PDF, CSV)
+pypdf
+pandas

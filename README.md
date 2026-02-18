@@ -11,13 +11,13 @@ Real-time voice AI agent where you can talk over WebRTC (LiveKit) and get answer
 - **RAG**: Upload PDF, CSV, TXT, MD files - agent retrieves relevant chunks and answers from them
 - **React Frontend**: WebRTC connect, editable system prompt, document upload, live transcript, RAG sources panel
 
-## Architecture
+## Architectural Flow
 
-```
+```mermaid
 flowchart TD
-    A["React UI (Frontend)\n- WebRTC connect\n- Edit prompt\n- Upload files"]
+    A["React UI (Frontend)<br/>- WebRTC connect<br/>- Edit prompt<br/>- Upload files"]
     B["LiveKit Room (WebRTC Audio Stream)"]
-    C["FastAPI Backend\n- Upload Files\n- FAISS RAG\n- Token Generation"]
+    C["FastAPI Backend<br/>- Upload Files<br/>- FAISS RAG<br/>- Token Generation"]
     D["STT (Groq Whisper optional)"]
     E["LLM (Groq Llama optional)"]
     F["TTS (Cartesia optional)"]
